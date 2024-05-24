@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="SharedProjectFile_SccProperties">
+    <SharedProjectFile_ProjectGuid>{b527b522-30e5-45a6-81e2-8d10dda18bbe}</SharedProjectFile_ProjectGuid>
+    <SharedProjectFile_SccProjectName>SAK</SharedProjectFile_SccProjectName>
+    <SharedProjectFile_SccAuxPath>SAK</SharedProjectFile_SccAuxPath>
+    <SharedProjectFile_SccLocalPath>SAK</SharedProjectFile_SccLocalPath>
+    <SharedProjectFile_SccProvider>SAK</SharedProjectFile_SccProvider>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>{744BFE8E-77AB-47D4-9FD4-D60283000A67}</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>IBEXBle</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)App.xaml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Behavior\ListViewNoSelectionBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converter\AlarmConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converter\BankConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converter\ChartConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converter\CoreConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converter\ScanConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converter\TemperatureConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\BaseModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\BaseViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Bluetooth.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\CoreUtils.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Definitions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ExcelUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\IBex.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\LittleEndian.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\SBinaryReader.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\TestUtil.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\TranslateExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)CustomControl\CustomProgressBar.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DependencyInterface\ICheckPermisstion.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DependencyInterface\IExcel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DependencyInterface\IToast.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DependencyInterface\IVibrator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AlarmGroupModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\AlarmModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\BankModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CellChartModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\CellModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\DeviceModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ExcelModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\IBexInfoModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BankInfoViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BankViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CellChartViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\CellViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\DownloadViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SavedDataViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\ScanViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\BankInfoPage.xaml.cs">
+      <DependentUpon>BankInfoPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\BankPage.xaml.cs">
+      <DependentUpon>BankPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CellChartPage.xaml.cs">
+      <DependentUpon>CellChartPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\CellPage.xaml.cs">
+      <DependentUpon>CellPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\DownloadPage.xaml.cs">
+      <DependentUpon>DownloadPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\SavedDataPage.xaml.cs">
+      <DependentUpon>SavedDataPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Views\ScanPage.xaml.cs">
+      <DependentUpon>ScanPage.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\ScanPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\DownloadPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\BankPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\SavedDataPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\BankInfoPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CellPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Views\CellChartPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Resources\" />
+  </ItemGroup>
+</Project>

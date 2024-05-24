@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             xmlns:behavior="clr-namespace:IBEXBle.Behavior"
+             xmlns:core="clr-namespace:IBEXBle.Core"
+             xmlns:viewModel="clr-namespace:IBEXBle.ViewModels"
+             x:Name="savedDataPage"
+             x:Class="IBEXBle.Views.SavedDataPage"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <viewModel:SavedDataViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="20, 40, 20, 20"  
+                    Android="3, 3, 3, 3"/>
+    </ContentPage.Padding>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <ListView ItemsSource="{Binding ExcelModels}" IsEnabled="{Binding IsNotBusy}">
+            <ListView.Behaviors>
+                <behavior:ListViewNoSelectionBehavior/>
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="55"/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="70"/>
+                            </Grid.ColumnDefinitions>
+                            <Switch IsToggled="{Binding IsSelected}"/>
+                            <Label Grid.Column="1" Text="{Binding FileName}" VerticalTextAlignment="Center"/>
+                            <Button Grid.Column="2" Text="Open" Command="{Binding Source={x:Reference savedDataPage}, Path=BindingContext.ExecuteExcel}" CommandParameter="{Binding}" IsEnabled="{Binding IsNotBusy}" Style="{StaticResource ButtonCell}"/>
+                        </Grid>
+                    </ViewCell>                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Text="{core:Translate Share}" Command="{Binding Shared}" IsEnabled="{Binding IsNotBusy}"/>
+            <ActivityIndicator IsRunning="{Binding IsSharing}" IsVisible="{Binding IsSharing}"/>
+            <Button Grid.Column="1" Text="{core:Translate Delete}" Command="{Binding Delete}" IsEnabled="{Binding IsNotBusy}"/>
+            <ActivityIndicator Grid.Column="1" IsRunning="{Binding IsDeleting}" IsVisible="{Binding IsDeleting}"/>
+        </Grid>        
+    </Grid>    
+</ContentPage>

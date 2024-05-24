@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behavior="clr-namespace:IBEXBle.Behavior"             
+             xmlns:converter="clr-namespace:IBEXBle.Converter"
+             xmlns:core="clr-namespace:IBEXBle.Core"
+             xmlns:customControl="clr-namespace:IBEXBle.CustomControl"
+             xmlns:viewModel="clr-namespace:IBEXBle.ViewModels"
+             x:Class="IBEXBle.Views.CellChartPage">
+    <ContentPage.BindingContext>
+        <viewModel:CellChartViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ListView">
+                <Setter Property="RowHeight" Value="20" />
+                <Setter Property="SeparatorVisibility" Value="None" />
+                <Setter Property="Margin" Value="0,0,10,0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="20, 40, 20, 20"  
+                    Android="3, 3, 3, 3"/>
+    </ContentPage.Padding>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Label Text="{Binding Title}" FontSize="32" VerticalTextAlignment="Center" TextColor="{StaticResource yHighlightColor}" Margin="5,0,0,0"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Button Text="{core:Translate Resistance}" TextColor="{Binding VisibleResistance, Converter={converter:ChartSelectedColorConverter}}" Command="{Binding VisibleButton}" CommandParameter="R"/>
+            <Button Grid.Column="1" Text="{core:Translate Voltage}" TextColor="{Binding VisibleVoltage, Converter={converter:ChartSelectedColorConverter}}" Command="{Binding VisibleButton}" CommandParameter="V"/>
+            <Button Grid.Column="2" Text="{core:Translate Temperature}" TextColor="{Binding VisibleTemperature, Converter={converter:ChartSelectedColorConverter}}" Command="{Binding VisibleButton}" CommandParameter="T"/>
+        </Grid>
+        <ListView Grid.Row="2" ItemsSource="{Binding ResistanceCharts}" IsVisible="{Binding VisibleResistance}">
+            <ListView.Behaviors>
+                <behavior:ListViewNoSelectionBehavior/>
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Name}" HorizontalOptions="Center"/>
+                            <Label Grid.Column="1" Text="{Binding Value, StringFormat={StaticResource formatResistance}}" TextColor="{Binding Color}" HorizontalTextAlignment="End" Margin="0,0,15,0" IsVisible="{Binding IsSeparator, Converter={converter:SwapBoolConverter}}" />
+                            <customControl:CustomProgressBar Grid.Column="2" Progress="{Binding Progress}" ProgressColor="{Binding Color}" IsVisible="{Binding IsSeparator, Converter={converter:SwapBoolConverter}}"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView Grid.Row="2" ItemsSource="{Binding VoltageCharts}" IsVisible="{Binding VisibleVoltage}">
+            <ListView.Behaviors>
+                <behavior:ListViewNoSelectionBehavior/>
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition />                                
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Name}" HorizontalOptions="Center"/>                            
+                            <Label Grid.Column="1" Text="{Binding Value, StringFormat={StaticResource formatVoltage}}" TextColor="{Binding Color}" HorizontalTextAlignment="End" Margin="0,0,15,0" IsVisible="{Binding IsSeparator, Converter={converter:SwapBoolConverter}}" />
+                            <customControl:CustomProgressBar Grid.Column="2" Progress="{Binding Progress}" ProgressColor="{Binding Color}" IsVisible="{Binding IsSeparator, Converter={converter:SwapBoolConverter}}" />
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <ListView Grid.Row="2" ItemsSource="{Binding TemperatureCharts}" IsVisible="{Binding VisibleTemperature}">
+            <ListView.Behaviors>
+                <behavior:ListViewNoSelectionBehavior/>
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="60"/>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Name}" HorizontalOptions="Center"/>
+                            <Label Grid.Column="1" Text="{Binding Value, Converter={converter:TemperatureConverter}, StringFormat={StaticResource formatTemperature}}" TextColor="{Binding Color}" HorizontalTextAlignment="End" Margin="0,0,15,0" IsVisible="{Binding IsSeparator, Converter={converter:SwapBoolConverter}}" />
+                            <customControl:CustomProgressBar Grid.Column="2" Progress="{Binding Progress}" ProgressColor="{Binding Color}" IsVisible="{Binding IsSeparator, Converter={converter:SwapBoolConverter}}" />                            
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>        
+        <Grid Grid.Row="3">            
+            <Button Text="Close" Command="{Binding Close}" IsEnabled="{Binding IsNotBusy}"/>
+        </Grid>
+    </Grid>
+</ContentPage>

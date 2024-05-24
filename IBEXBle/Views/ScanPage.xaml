@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:IBEXBle.Converter"
+             xmlns:viewModel="clr-namespace:IBEXBle.ViewModels"
+             x:Class="IBEXBle.Views.ScanPage"             
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <viewModel:ScanViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="20, 40, 20, 20"  
+                    Android="3, 3, 3, 3"/>
+    </ContentPage.Padding>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>            
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Text="{Binding IsScanning, Converter={converter:ScanToString}}" Command="{Binding Scan}" IsEnabled="{Binding IsScanning, Converter={converter:SwapBoolConverter}}"/>
+        <Label Grid.Row="1" Text="{Binding ConnectingInfo}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+        <ListView Grid.Row="2" ItemsSource="{Binding DeviceModels}" SelectedItem="{Binding SelectedDevice, Mode=TwoWay}" IsEnabled="{Binding IsNotBusy}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding DeviceName}" Detail="{Binding Id, Converter={converter:GuidToStringConverter}}" TextColor="{StaticResource highlightColor}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>        
+        <ActivityIndicator IsVisible="{Binding IsScanning}" IsRunning="{Binding IsScanning}"/>
+    </Grid>    
+</ContentPage>

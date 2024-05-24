@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:behavior="clr-namespace:IBEXBle.Behavior"
+             xmlns:converter="clr-namespace:IBEXBle.Converter"
+             xmlns:core="clr-namespace:IBEXBle.Core"
+             xmlns:viewModel="clr-namespace:IBEXBle.ViewModels"
+             x:Class="IBEXBle.Views.BankPage"
+             x:Name="bankPage"
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <viewModel:BankViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="20, 40, 20, 20"  
+                    Android="3, 3, 3, 3"/>
+    </ContentPage.Padding>    
+    <Grid>
+        <Grid.RowDefinitions>            
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>        
+        <ListView ItemsSource="{Binding Banks}" IsEnabled="{Binding IsNotBusy}" Margin="3,0,3,0">
+            <ListView.Behaviors>
+                <behavior:ListViewNoSelectionBehavior/>
+            </ListView.Behaviors>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Spacing="0">
+                            <Label Text="{Binding Name}" VerticalTextAlignment="Center" TextColor="{Binding AlarmStatus, Converter={converter:AlarmColorConverter}}"/>
+                            <Button Text="Info" Command="{Binding Source={x:Reference bankPage}, Path=BindingContext.BankInfo}" CommandParameter="{Binding}" HorizontalOptions="EndAndExpand" IsEnabled="{Binding IsNotBusy}" Style="{StaticResource ButtonCell}"/>
+                            <Button Text="Chart" Command="{Binding Source={x:Reference bankPage}, Path=BindingContext.CellChart}" CommandParameter="{Binding}" HorizontalOptions="End" IsEnabled="{Binding IsNotBusy}" Style="{StaticResource ButtonCell}"/>
+                            <Button Text="Cell" Command="{Binding Source={x:Reference bankPage}, Path=BindingContext.CellInfo}" CommandParameter="{Binding}" HorizontalOptions="End" IsEnabled="{Binding IsNotBusy}" Style="{StaticResource ButtonCell}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="1" Text="{core:Translate SaveExcel}" Command="{Binding Excel}" IsEnabled="{Binding IsNotBusy}"/>
+        <ActivityIndicator Grid.Row="1" IsRunning="{Binding IsWritingExcel}" IsVisible="{Binding IsWritingExcel}"/>
+    </Grid>
+</ContentPage>

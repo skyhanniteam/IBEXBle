@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             xmlns:core="clr-namespace:IBEXBle.Core"
+             xmlns:local="clr-namespace:IBEXBle"
+             xmlns:viewModel="clr-namespace:IBEXBle.ViewModels"
+             x:Class="IBEXBle.Views.MainPage"             
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <viewModel:MainViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="20, 40, 20, 20"  
+                    Android="3, 3, 3, 3"/>
+    </ContentPage.Padding>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180" />            
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>        
+        <Image Source="ibexLogo.png" Margin="20,10,20,0"/>
+        <Label Grid.Row="1" Text="{Binding ConnectingInfo}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="18"/>        
+        <Button Grid.Row="2" Text="{core:Translate SearchIbex}" Command="{Binding Scan}" IsEnabled="{Binding IsNotBusy}" Style="{StaticResource ButtonRadius}"/>
+        <Button Grid.Row="3" Text="{core:Translate Download}" Command="{Binding DataDownload}" IsEnabled="{Binding IsNotBusyAndBleConnected}" Style="{StaticResource ButtonRadius}"/>
+        <Button Grid.Row="4" Text="{core:Translate SelectData}" Command="{Binding Bank}" IsEnabled="{Binding IsNotBusy}" Style="{StaticResource ButtonRadius}"/>
+        <Button Grid.Row="5" Text="{core:Translate SearchExcel}" Command="{Binding SelectExcel}" IsEnabled="{Binding IsNotBusy}" Style="{StaticResource ButtonRadius}"/>
+        <Button Grid.Row="6" Text="{core:Translate DisConnect}" Command="{Binding DisConnect}" IsEnabled="{Binding IsNotBusyAndBleConnected}" Style="{StaticResource ButtonRadius}"/>
+    </Grid>
+</ContentPage>

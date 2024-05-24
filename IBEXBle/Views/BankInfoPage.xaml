@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
+             xmlns:converter="clr-namespace:IBEXBle.Converter"             
+             xmlns:core="clr-namespace:IBEXBle.Core"             
+             xmlns:viewModel="clr-namespace:IBEXBle.ViewModels"
+             x:Class="IBEXBle.Views.BankInfoPage">
+    <ContentPage.BindingContext>
+        <viewModel:BankInfoViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="20, 40, 20, 20"  
+                    Android="3, 3, 3, 3"/>
+    </ContentPage.Padding>
+    <Grid Margin="3,0,3,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>        
+        <Label Grid.ColumnSpan="2" Text="{Binding Bank.Name}" FontSize="32" VerticalTextAlignment="Center" TextColor="{StaticResource yHighlightColor}" Margin="5,0,0,0"/>
+        <Label Grid.Row="1" Text="{core:Translate Place}"/>
+        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Bank.Place}"/>
+        <Label Grid.Row="2" Text="{core:Translate Maker}"/>
+        <Label Grid.Row="2" Grid.Column="1" Text="{Binding Bank.Maker}"/>
+        <Label Grid.Row="3" Text="{core:Translate Model}"/>
+        <Label Grid.Row="3" Grid.Column="1" Text="{Binding Bank.Model}"/>
+        <Label Grid.Row="4" Text="{core:Translate Capa}"/>
+        <Label Grid.Row="4" Grid.Column="1" Text="{Binding Bank.Capa}"/>
+        <Label Grid.Row="5" Text="{core:Translate Date}"/>
+        <Label Grid.Row="5" Grid.Column="1" Text="{Binding Bank.Date, Converter={converter:BankDateConverter}}"/>
+        <Label Grid.Row="6" Text="{core:Translate Memo}"/>
+        <Label Grid.Row="6" Grid.Column="1" Text="{Binding Bank.Memo}"/>
+        <Label Grid.Row="7" Text="{core:Translate ImpedanceStandardAlarm}"/>
+        <Label Grid.Row="7" Grid.Column="1" Text="{Binding Bank.Alarm.ImpedanceStandard}"/>
+        <Label Grid.Row="8" Text="{core:Translate ImpedanceFailAlarm}"/>
+        <Label Grid.Row="8" Grid.Column="1" Text="{Binding Bank.Alarm.ImpedanceFail}"/>
+        <Label Grid.Row="9" Text="{core:Translate ImpedanceWaringAlarm}"/>
+        <Label Grid.Row="9" Grid.Column="1" Text="{Binding Bank.Alarm.ImpedanceAlarm}"/>
+        <Label Grid.Row="10" Text="{core:Translate OverVoltageAlarm}"/>
+        <Label Grid.Row="10" Grid.Column="1" Text="{Binding Bank.Alarm.OverVoltage}"/>
+        <Label Grid.Row="11" Text="{core:Translate UnderVoltageAlarm}"/>
+        <Label Grid.Row="11" Grid.Column="1" Text="{Binding Bank.Alarm.UnderVoltage}"/>
+        <Label Grid.Row="12" Text="{core:Translate TemperatureAlarm}"/>
+        <Label Grid.Row="12" Grid.Column="1" Text="{Binding Bank.Alarm.Temperature, Converter={converter:TemperatureConverter}}"/>
+        <Button Grid.Row="14" Grid.ColumnSpan="2" Text="Close" Command="{Binding Close}" IsEnabled="{Binding IsNotBusy}"/>
+    </Grid>
+</ContentPage>

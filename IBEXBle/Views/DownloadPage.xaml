@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModel="clr-namespace:IBEXBle.ViewModels"
+             xmlns:core="clr-namespace:IBEXBle.Core"
+             x:Class="IBEXBle.Views.DownloadPage"             
+             Title="{Binding Title}">
+    <ContentPage.BindingContext>
+        <viewModel:DownloadViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness"
+                    iOS="20, 40, 20, 20"  
+                    Android="3, 3, 3, 3"/>
+    </ContentPage.Padding>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Label Grid.Row="1" Text="Downloading..." FontSize="40" Style="{StaticResource LabelTitle}" TextColor="{StaticResource highlightColor}" VerticalTextAlignment="Start"/>
+        <ProgressBar Grid.Row="2" Progress="{Binding Progress}" HorizontalOptions="Fill"/>
+        <StackLayout Grid.Row="3" Orientation="Horizontal">
+            <Label Text="{Binding ReceiveDataLength}" HorizontalOptions="EndAndExpand"/>
+            <Label Text="/" HorizontalOptions="End"/>
+            <Label Text="{Binding TotalDataLength}" HorizontalOptions="End"/>
+        </StackLayout>
+        <Button Grid.Row="4" Text="{core:Translate Cancel}" Command="{Binding Cancel}"/>
+    </Grid>    
+</ContentPage>
+    
